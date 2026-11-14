@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una invitación especial 💗</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffe0ec, #f5e1ff, #fff0f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 20px;
+    color: #824b70;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    background: rgba(255,255,255,0.9);
+    padding: 35px 25px;
+    border-radius: 28px;
+    box-shadow: 0 10px 40px #d69acb55;
+    border: 2px solid white;
+}
+
+.heart {
+    font-size: 65px;
+    animation: latido 1.2s infinite;
+}
+
+h1 {
+    font-size: 27px;
+    margin: 15px 0;
+    color: #d36a9d;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 14px 0;
+}
+
+button {
+    border: none;
+    padding: 14px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 8px 4px;
+}
+
+button:hover {
+    transform: scale(1.06);
+}
+
+.open-btn {
+    background: #e99bc1;
+    color: white;
+}
+
+.yes-btn {
+    background: #ed83b2;
+    color: white;
+}
+
+.no-btn {
+    background: #e9d8f2;
+    color: #805a85;
+}
+
+.hidden {
+    display: none;
+}
+
+#respuesta {
+    margin-top: 22px;
+    padding: 15px;
+    border-radius: 18px;
+    background: #fff0f7;
+    animation: aparecer 0.6s ease;
+}
+
+hr {
+    border: 1px solid #f8d5e7;
+    margin: 22px 0;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: flotar 7s linear forwards;
+    z-index: 1;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes flotar {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 400px) {
+    h1 { font-size: 24px; }
+    .card { padding: 28px 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <div class="heart">💗</div>
+
+        <h1>¡Tengo algo para ti!</h1>
+
+        <p>
+            Hay algo que quisiera preguntarte...
+            pero primero tienes que abrir esta pequeña sorpresa. 🌷
+        </p>
+
+        <button class="open-btn" onclick="abrirCarta()">
+            Abrir mi cartita 💌
+        </button>
+
+        <div id="invitacion" class="hidden">
+
+            <hr>
+
+            <h1>Una invitación especial 🌸</h1>
+
+            <p>
+                Quiero proponerte algo...
+                ¿Y si salimos un día de estos, el jueves en la noche, si?
+                Podemos ir a caminar, hablar, reír,
+                comer algo rico y disfrutar de un bonito momento.
+            </p>
+
+            <p>
+                No importa tanto el lugar ni lo que hagamos,
+                lo más importante para mí es que quiero
+                pasar un momento contigo. 💗
+            </p>
+
+            <p>
+                Me gustaría compartir un ratito contigo,
+                conocernos un poquito más y crear
+                un recuerdo bonito.
+            </p>
+
+            <p>
+                <strong>
+                Entonces... ¿aceptas mi invitación? 🥺🌷
+                </strong>
+            </p>
+
+            <button class="yes-btn" onclick="aceptar()">
+                ¡SÍ, ACEPTO! ❤️
+            </button>
+
+            <button class="no-btn" onclick="rechazar()">
+                NO PUEDO, PERDÓN 🥺
+            </button>
+
+            <div id="respuesta" class="hidden"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+// IMPORTANTE: COLOCA AQUÍ TU NÚMERO DE WHATSAPP
+// Ejemplo: 59171234567
+// Sin el signo + ni espacios.
+
+const miNumero = "59163783033";
+
+function abrirCarta() {
+    document.getElementById("invitacion")
+    .classList.remove("hidden");
+
+    document.querySelector(".open-btn").style.display = "none";
+}
+
+function enviarWhatsApp(mensaje) {
+
+    if (miNumero.includes("X")) {
+        alert("Primero debes configurar tu número de WhatsApp en el código.");
+        return;
+    }
+
+    const enlace = "https://wa.me/" + miNumero +
+    "?text=" + encodeURIComponent(mensaje);
+
+    window.location.href = enlace;
+}
+
+function aceptar() {
+
+    const respuesta = document.getElementById("respuesta");
+
+    respuesta.classList.remove("hidden");
+
+    respuesta.innerHTML = `
+        <h2>¡QUÉ ALEGRÍA! 💗</h2>
+        <p>¡Gracias por aceptar mi invitación!</p>
+        <p>Espero que podamos pasar un momento muy bonito. 🌷</p>
+        <p>Ahora solo falta ponernos de acuerdo. 🥰</p>
+        <p>Abriendo WhatsApp... 💌</p>
+    `;
+
+    corazonesExtra();
+
+    enviarWhatsApp(
+        "He visto tu invitación y SÍ, ACEPTO.  Me gustaría salir contigo y pasar un momento bonito. ¡Gracias por invitarme!"
+    );
+}
+
+function rechazar() {
+
+    const respuesta = document.getElementById("respuesta");
+
+    respuesta.classList.remove("hidden");
+
+    respuesta.innerHTML = `
+        <h2>No te preocupes 💕</h2>
+        <p>Está bien, no pasa nada.</p>
+        <p>Gracias por tomarte el tiempo de leer
+        mi invitación. 🌸</p>
+        <p>Abriendo WhatsApp... 💌</p>
+    `;
+
+    enviarWhatsApp(
+        "Holaaa, gracias por la invitación. 💗 Por ahora no puedo aceptar, pero agradezco mucho el detalle. 🌷"
+    );
+}
+
+function crearCorazon() {
+
+    const corazon = document.createElement("div");
+
+    corazon.className = "floating-heart";
+
+    corazon.innerHTML = ["💗", "💕", "💖", "🌸", "💘"][
+        Math.floor(Math.random() * 5)
+    ];
+
+    corazon.style.left = Math.random() * 100 + "vw";
+
+    corazon.style.animationDuration =
+    (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => corazon.remove(), 8000);
+}
+
+function corazonesExtra() {
+
+    for (let i = 0; i < 25; i++) {
+        setTimeout(crearCorazon, i * 100);
+    }
+}
+
+setInterval(crearCorazon, 700);
+
+</script>
+
+</body>
+</html>
